@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row">
+    <div class="section-title padd-15">
+      <h2>Portfolio</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="portfolio-heading padd-15">
+      <h2>My Last Projects:</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="portfolio-filters padd-15">
+      <ul class="filter-list">
+        <li
+          *ngFor="let filter of filters"
+          class="filter-item"
+          [class.active]="activeFilter === filter"
+          (click)="setFilter(filter)"
+        >
+          <span class="filter-label">{{ filter }}</span>
+          <span class="filter-count">{{ getCount(filter) }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="portfolio-item padd-15" *ngFor="let item of filteredItems" [@fadeIn]>
+      <div class="portfolio-item-inner shadow-dark">
+        <div class="portfolio-img">
+          <img [src]="item.img" alt="portfolio image" />
+
+          <!-- Overlay -->
+          <div class="portfolio-overlay">
+            <div class="overlay-content">
+              <h3 class="overlay-title">{{ item.title }}</h3>
+              <p class="overlay-category">{{ item.category }}</p>
+              <a [href]="item.demoUrl" target="_blank" class="demo-btn">
+                <span class="btn-icon">
+                  <i class="fas fa-eye"></i>
+                </span>
+                <span class="btn-text">Live Demo</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

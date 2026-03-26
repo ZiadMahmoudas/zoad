@@ -1,0 +1,20 @@
+<div class="aside" [class.open]="isOpen">
+  <div class="logo">
+    <a href="#"><span>Z</span>iad</a>
+  </div>
+
+  <div class="nav-toggler" [class.open]="isOpen" (click)="toggleMenu()">
+    <span></span>
+  </div>
+
+  <ul class="nav">
+    <li *ngFor="let item of navItems">
+      <a
+        [class.active]="activeSection === item.id"
+        (click)="navigate(item.id)"
+      >
+        <i [class]="item.icon"></i>{{ item.label }}
+      </a>
+    </li>
+  </ul>
+</div>

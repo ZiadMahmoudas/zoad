@@ -1,0 +1,230 @@
+// ============================================
+// Portfolio Item – Wrapper
+// ============================================
+.portfolio-item-inner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+// ============================================
+// Base Image
+// ============================================
+.portfolio-img {
+  position: relative;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+
+    // subtle scale-in on hover (behind overlay)
+    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+                filter 0.55s ease;
+  }
+}
+
+// ============================================
+// Overlay – slides up from bottom
+// ============================================
+.portfolio-overlay {
+  position: absolute;
+  inset: 0;                       // top/right/bottom/left = 0
+  display: flex;
+  align-items: flex-end;          // content starts from bottom
+
+  // Glass-style backdrop
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    transparent 100%
+  );
+
+  // The "sliding panel" sits below the image initially
+  clip-path: inset(100% 0 0 0);   // clip from bottom → top
+  transition: clip-path 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Hover state: reveal overlay + scale image
+.portfolio-item-inner:hover {
+
+  .portfolio-img img {
+    transform: scale(1.08);
+    filter: brightness(0.75) saturate(1.1);
+  }
+
+  .portfolio-overlay {
+    clip-path: inset(0% 0 0 0);   // fully visible
+  }
+
+  .overlay-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .demo-btn {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+// ============================================
+// Overlay Content
+// ============================================
+.overlay-content {
+  padding: 1.5rem;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.45s ease 0.1s,
+              transform 0.45s ease 0.1s;
+}
+
+.overlay-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 4px;
+  letter-spacing: 0.03em;
+}
+
+.overlay-category {
+  font-size: 0.8rem;
+  color: var(--skin-color);       // 🎨 matches theme switcher color
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+// ============================================
+// Demo Button
+// ============================================
+.demo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 22px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #fff;
+
+  // Border uses skin-color; background is semi-transparent
+  border: 2px solid var(--skin-color);
+  background: transparent;
+
+  // Animated entrance (delayed slightly after overlay)
+  opacity: 0;
+  transform: translateY(10px) scale(0.95);
+  transition: opacity 0.4s ease 0.25s,
+              transform 0.4s ease 0.25s,
+              background 0.25s ease,
+              color 0.25s ease;
+
+  .btn-icon {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+
+    i {
+      // icon pulse on hover
+      transition: transform 0.3s ease;
+    }
+  }
+
+  // Hover: fill with skin-color
+  &:hover {
+    background: var(--skin-color);
+    color: #fff;
+
+    .btn-icon i {
+      transform: scale(1.2);
+    }
+  }
+
+  // Active press
+  &:active {
+    transform: scale(0.97);
+  }
+}
+// ============================================
+// Filter Bar
+// ============================================
+.portfolio-filters {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.filter-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.filter-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  background: transparent;
+  transition: all 0.3s ease;
+  user-select: none;
+
+  .filter-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+  }
+
+  .filter-count {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+    min-width: 20px;
+    text-align: center;
+  }
+
+  &:hover:not(.active) {
+    border-color: var(--skin-color);
+    
+    .filter-label {
+      color: var(--skin-color);
+    }
+  }
+
+  // ✅ الـ active state — بيستخدم skin-color بالكامل
+  &.active {
+    border-color: var(--skin-color);
+    background: rgba(var(--skin-color-rgb), 0.12); // لو عندك RGB variable
+
+    // لو مش عندك RGB variable، استخدم الطريقة دي:
+    background: color-mix(in srgb, var(--skin-color) 15%, transparent);
+
+    .filter-label {
+      color: var(--skin-color);
+      font-weight: 600;
+    }
+
+    .filter-count {
+      background: var(--skin-color);
+      color: #fff;
+    }
+  }
+}

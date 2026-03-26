@@ -1,0 +1,138 @@
+/* تنسيق رسالة الخطأ */
+.error-message {
+  color: #ff4b4b; /* لون أحمر */
+  font-size: 14px;
+  margin-top: 5px;
+  padding-left: 5px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* تنسيق الحقل لما يكون فيه خطأ */
+.form-control.is-invalid {
+  border-color: #ff4b4b !important;
+  box-shadow: 0 0 5px rgba(255, 75, 75, 0.2);
+}
+
+/* تنسيق رسالة النجاح والشكر */
+.success-message {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: var(--skin-color, #ec1839); /* بياخد لون الثيم بتاعك */
+  color: #fff;
+  border-radius: 5px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  animation: slideUp 0.5s ease;
+  font-weight: bold;
+}
+
+.success-message i {
+  font-size: 20px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ... (الستايلات القديمة) ... */
+/* تنسيق الحاوية الكبيرة عشان تتوسطن */
+.social-section {
+  text-align: center;
+  width: 100%; /* عشان تاخد العرض كامل */
+  margin-bottom: 30px;
+}
+
+.contact-subtitle {
+  margin-bottom: 20px;
+  color: var(--skin-color);
+  font-size: 20px; /* ظبط الخط حسب التمبلت */
+}
+
+/* تنسيق الحاوية اللي ماسكة الأيقونات */
+.social-icons-wrapper {
+  display: flex;
+  justify-content: center; /* توسيط الأيقونات */
+  align-items: center;
+  gap: 20px; /* المسافة بين كل أيقونة والتانية */
+  flex-wrap: wrap; /* عشان لو الشاشة صغرت ينزلوا تحت بعض */
+}
+
+/* =========================================
+   شكل الأيقونة (الزرار المدور)
+   ========================================= */
+.social-icon-item {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  background: var(--bg-black-100); /* لون الخلفية من الثيم */
+  border-radius: 50%;
+  text-decoration: none;
+  font-size: 18px;
+  color: var(--text-black-700); /* لون الأيقونة */
+  transition: all 0.3s ease;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+/* =========================================
+   تأثير الـ Hover + الربط بالـ Switcher
+   ========================================= */
+.social-icon-item:hover {
+  background-color: var(--skin-color); /* هنا السحر: بياخد لون الثيم */
+  color: #ffffff;
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* =========================================
+   تنسيق الـ Tooltip (الـ Pin)
+   ========================================= */
+.social-tooltip {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background-color: var(--skin-color); /* خلفية الـ Pin بلون الثيم */
+  color: #fff;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* السهم الصغير تحت الـ Pin */
+.social-tooltip::before {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-style: solid;
+  border-width: 6px 6px 0 6px;
+  border-color: var(--skin-color) transparent transparent transparent;
+}
+
+/* إظهار الـ Pin عند الوقوف */
+.social-icon-item:hover .social-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}

@@ -1,0 +1,119 @@
+<div class="container">
+  <div class="row">
+    <div class="section-title padd-15">
+      <h2>Contact</h2>
+    </div>
+  </div>
+
+  <h3 class="contact-title padd-15">Any Question? Contact us!</h3>
+  <h4 class="contact-subtitle padd-15">I'm at your service</h4>
+
+  <div class="row">
+    <div class="contact-info-item padd-15" *ngFor="let info of contactInfo">
+      <div class="icon"><i [class]="info.icon + ' fa'"></i></div>
+      <h4>{{ info.title }}</h4>
+      <p>{{ info.value }}</p>
+    </div>
+  </div>
+<div class="row">
+  <div class="social-section padd-15">
+    <h4 class="contact-subtitle">Find me on</h4>
+    
+    <div class="social-icons-wrapper">
+      <a *ngFor="let social of socialLinks" 
+         [href]="social.url" 
+         target="_blank" 
+         class="social-icon-item">
+         
+        <i [class]="social.icon"></i>
+        
+        <span class="social-tooltip">{{ social.name }}</span>
+      </a>
+    </div>
+  </div>
+</div>
+  <h3 class="contact-title padd-15">Send me an email</h3>
+  <h4 class="contact-subtitle padd-15">I'll contact you as soon as possible!</h4>
+
+  <div class="row">
+    <div class="contact-form padd-15">
+      <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
+        <div class="row">
+          
+          <div class="form-item col-6 padd-15">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Name"
+                [(ngModel)]="formData.name" name="name" 
+                #nameInput="ngModel" required 
+                [class.is-invalid]="nameInput.invalid && (nameInput.touched || isSubmitted)" />
+              
+              <div class="error-message" *ngIf="nameInput.invalid && (nameInput.touched || isSubmitted)">
+                Name is required
+              </div>
+            </div>
+          </div>
+
+          <div class="form-item col-6 padd-15">
+            <div class="form-group">
+              <input type="email" class="form-control" placeholder="Email"
+                [(ngModel)]="formData.email" name="email" 
+                #emailInput="ngModel" required email
+                [class.is-invalid]="emailInput.invalid && (emailInput.touched || isSubmitted)" />
+
+              <div class="error-message" *ngIf="emailInput.invalid && (emailInput.touched || isSubmitted)">
+                <span *ngIf="emailInput.errors?.['required']">Email is required</span>
+                <span *ngIf="emailInput.errors?.['email']">Please enter a valid email</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-item col-12 padd-15">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Subject"
+                [(ngModel)]="formData.subject" name="subject" 
+                #subjectInput="ngModel" required
+                [class.is-invalid]="subjectInput.invalid && (subjectInput.touched || isSubmitted)" />
+
+              <div class="error-message" *ngIf="subjectInput.invalid && (subjectInput.touched || isSubmitted)">
+                Subject is required
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-item col-12 padd-15">
+            <div class="form-group">
+              <textarea class="form-control" placeholder="Message"
+                [(ngModel)]="formData.message" name="message" 
+                #msgInput="ngModel" required
+                [class.is-invalid]="msgInput.invalid && (msgInput.touched || isSubmitted)"></textarea>
+
+              <div class="error-message" *ngIf="msgInput.invalid && (msgInput.touched || isSubmitted)">
+                Message is required
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-item col-12 padd-15">
+            <div class="form-group">
+              <button type="submit" class="btn" [disabled]="isLoading">
+                {{ isLoading ? 'Sending...' : 'Send Message' }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+      
+      <div class="success-message" *ngIf="showSuccessMessage">
+        <i class="fa fa-check-circle"></i>
+        <p>Thanks! Your message has been sent.</p>
+      </div>
+
+    </div>
+  </div>
+</div>

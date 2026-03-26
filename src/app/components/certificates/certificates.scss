@@ -1,0 +1,379 @@
+// ============================================================
+//  Certificates Component Styles
+//  Uses --skin-color from your existing theme switcher
+// ============================================================
+
+// ── Heading ──────────────────────────────────────────────────
+.certificates-heading {
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0 0 1.5rem;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 3px;
+      background: var(--skin-color);
+      border-radius: 2px;
+      margin-top: 6px;
+    }
+  }
+}
+
+// ── Filter Bar ───────────────────────────────────────────────
+.cert-filters {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.filter-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.filter-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 18px;
+  border-radius: 50px;
+  cursor: pointer;
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+  transition: border-color 0.3s ease, background 0.3s ease;
+  user-select: none;
+
+  .filter-label {
+    font-size: 0.83rem;
+    font-weight: 500;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+  }
+
+  .filter-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-color);
+    min-width: 22px;
+    text-align: center;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  &:hover:not(.active) {
+    border-color: var(--skin-color);
+
+    .filter-label {
+      color: var(--skin-color);
+    }
+  }
+
+  &.active {
+    border-color: var(--skin-color);
+    background: color-mix(in srgb, var(--skin-color) 14%, transparent);
+
+    .filter-label {
+      color: var(--skin-color);
+      font-weight: 600;
+    }
+
+    .filter-badge {
+      background: var(--skin-color);
+      color: #fff;
+    }
+  }
+}
+
+// ── Grid Item ────────────────────────────────────────────────
+.cert-item {
+  width: 33.33%;
+margin-bottom: 38px;
+  @media (max-width: 991px) { width: 50%; }
+  @media (max-width: 575px) { width: 100%; }
+}
+
+// ── Flip Card ────────────────────────────────────────────────
+.flip-card {
+  perspective: 1200px;
+  height: 280px;
+
+  &:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 10px;
+}
+
+// ── Both Faces shared ────────────────────────────────────────
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+// ── FRONT ────────────────────────────────────────────────────
+.flip-card-front {
+  background: var(--bg-color-2, #1e1e2e);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  flex-direction: column;
+
+  .cert-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .cert-img-wrap {
+    position: relative;
+    flex: 1;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.55s ease;
+    }
+
+    .shimmer {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        105deg,
+        transparent 40%,
+        rgba(255, 255, 255, 0.06) 50%,
+        transparent 60%
+      );
+      background-size: 200% 100%;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+  }
+
+  .flip-hint {
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.35);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+
+    i {
+      font-size: 0.65rem;
+    }
+  }
+
+  &:hover {
+    .cert-img-wrap img {
+      transform: scale(1.05);
+    }
+
+    .shimmer {
+      opacity: 1;
+      animation: shimmer-move 1.2s ease forwards;
+    }
+  }
+}
+
+@keyframes shimmer-move {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+// ── BACK ─────────────────────────────────────────────────────
+.flip-card-back {
+  background: var(--bg-color-2, #1e1e2e);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1.25rem;
+  text-align: center;
+  gap: 0;
+
+  .back-accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--skin-color);
+    border-radius: 0;
+  }
+
+  .back-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    border: 2px solid;
+    flex-shrink: 0;
+  }
+
+  .back-content {
+    width: 100%;
+    margin-bottom: 1.2rem;
+  }
+
+  .back-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-color);
+    line-height: 1.4;
+    margin: 0 0 0.9rem;
+  }
+
+  .back-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .meta-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.55);
+
+    i {
+      font-size: 0.7rem;
+      color: var(--skin-color);
+      opacity: 0.8;
+    }
+  }
+
+  .verify-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 20px;
+    border-radius: 50px;
+    border: 1.5px solid var(--skin-color);
+    background: transparent;
+    color: var(--skin-color);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+    flex-shrink: 0;
+
+    &:hover {
+      background: var(--skin-color);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0) scale(0.97);
+    }
+
+    i {
+      font-size: 0.7rem;
+    }
+  }
+
+  .no-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.25);
+
+    i { font-size: 0.68rem; }
+  }
+}
+
+// ── Category Color Classes ────────────────────────────────────
+// These colorize both the badge (front) and the icon circle (back)
+
+.cat-frontend {
+  color: #61dafb;
+  border-color: rgba(97, 218, 251, 0.35) !important;
+  background: rgba(97, 218, 251, 0.1) !important;
+
+  i { color: #61dafb; }
+}
+
+.cat-backend {
+  color: #68d391;
+  border-color: rgba(104, 211, 145, 0.35) !important;
+  background: rgba(104, 211, 145, 0.1) !important;
+
+  i { color: #68d391; }
+}
+
+.cat-design {
+  color: #f6ad55;
+  border-color: rgba(246, 173, 85, 0.35) !important;
+  background: rgba(246, 173, 85, 0.1) !important;
+
+  i { color: #f6ad55; }
+}
+
+.cat-other {
+  color: #b794f4;
+  border-color: rgba(183, 148, 244, 0.35) !important;
+  background: rgba(183, 148, 244, 0.1) !important;
+
+  i { color: #b794f4; }
+}
+
+// ── Empty State ──────────────────────────────────────────────
+.empty-state {
+  width: 100%;
+  text-align: center;
+  padding: 4rem 1rem;
+  color: rgba(255, 255, 255, 0.25);
+
+  i {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+    margin: 0;
+  }
+}

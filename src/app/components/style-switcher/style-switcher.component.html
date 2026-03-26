@@ -1,0 +1,19 @@
+<div class="style-switcher" [class.open]="isOpen">
+  <div class="style-switcher-toggler s-icon" (click)="toggleSwitcher()">
+    <i class="fas fa-cog fa-spin"></i>
+  </div>
+
+  <div class="day-night s-icon" (click)="toggleDark()">
+    <i [class]="themeService.isDark ? 'fa-regular fa-sun' : 'fa-solid fa-moon'"></i>
+  </div>
+
+  <h4>Theme Colors</h4>
+
+  <div class="colors">
+    <span
+      *ngFor="let color of colors"
+      [class]="color"
+      (click)="setColor(color)"
+    ></span>
+  </div>
+</div>
