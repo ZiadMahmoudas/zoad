@@ -308,13 +308,13 @@ h3.profession {
 }
 
 .home .home-img img {
-  height: auto;
-  width: 288px;
-  margin: auto;
-  border-radius: 4px;
-  display: block;
-  position: relative;
-  z-index: 2;
+    height: auto;
+    width: 398px;
+    margin: auto;
+    border-radius: 4px;
+    display: block;
+    position: relative;
+    z-index: 2;
 }
 
 /* Top-left bracket */
@@ -332,15 +332,16 @@ h3.profession {
 
 /* Bottom-right bracket */
 .home .home-img::after {
-  content: '';
-  position: absolute;
-  height: 80px;
-  width: 80px;
-  border-bottom: 10px solid var(--skin-color);
-  border-right: 10px solid var(--skin-color);
-  bottom: 67px;
-  right: 36px;
-  z-index: 1;
+    content: "";
+    position: absolute;
+    height: 80px;
+    width: 80px;
+    border-bottom: 10px solid var(--skin-color);
+    border-right: 10px solid var(--skin-color);
+    bottom: 18px;
+    right: 330px;
+    z-index: 1;
+    transform: rotate(90deg);
 }
 
 /* ===================== ABOUT ===================== */
