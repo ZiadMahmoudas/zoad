@@ -142,7 +142,7 @@ export class PortfolioComponent {
       img: 'images/mexcre.webp',
       title: 'mexcreviews',
       category: 'WordPress',
-      demoUrl: 'https://mexcreviews.com',
+      demoUrl: 'https://mexicocroc.com',
     },
     {
       img: 'images/uofiq.webp',

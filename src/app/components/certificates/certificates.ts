@@ -14,7 +14,7 @@ export interface Certificate {
   title: string;
   issuer: string;
   date: string;
-  category: 'Frontend' | 'Backend' | 'Design' | 'Other';
+  category: 'Frontend' | 'Backend'  | 'Full-stack' | 'lead' | 'FreeLancer';
   img: string;
   credentialUrl?: string;
 }
@@ -48,62 +48,95 @@ export interface Certificate {
 export class certificates implements OnInit {
   activeFilter: string = 'All';
 
-  filters: string[] = ['All', 'Frontend', 'Backend', 'Design', 'Other'];
+  filters: string[] = ['All', 'Frontend', 'Full-stack' ,'Backend', 'lead','FreeLancer'];
 
   certificates: Certificate[] = [
     {
       id: 1,
-      title: 'Angular - The Complete Guide',
+      title: 'php - The Complete Guide',
       issuer: 'Udemy',
-      date: 'Jan 2024',
-      category: 'Frontend',
-      img: 'images/certs/angular.webp',
-      credentialUrl: 'https://udemy.com/certificate/...',
+      date: 'feb 2026',
+      category: 'Full-stack',
+      img: 'images/6.webp',
+      // credentialUrl: 'https://udemy.com/certificate/...',
     },
     {
       id: 2,
-      title: 'React & Redux Complete Course',
+      title: 'Frontend(Angular)',
       issuer: 'Coursera',
       date: 'Mar 2024',
       category: 'Frontend',
-      img: 'images/certs/react.webp',
-      credentialUrl: 'https://coursera.org/verify/...',
+      img: 'images/7.webp',
+      // credentialUrl: 'https://coursera.org/verify/...',
     },
     {
       id: 3,
-      title: 'Node.js Developer Course',
-      issuer: 'Udemy',
-      date: 'Nov 2023',
-      category: 'Backend',
-      img: 'images/certs/nodejs.webp',
-      credentialUrl: 'https://udemy.com/certificate/...',
+      title: 'LeadShip Developer Course',
+      issuer: 'Depi',
+      date: 'may 2025',
+      category: 'lead',
+      img: 'images/5.webp',
+      // credentialUrl: 'https://udemy.com/certificate/...',
     },
     {
       id: 4,
-      title: 'UI/UX Design Fundamentals',
-      issuer: 'Google',
-      date: 'Aug 2023',
-      category: 'Design',
-      img: 'images/certs/uiux.webp',
-      credentialUrl: 'https://grow.google/certificates/...',
+      title: 'Backend(.NET)',
+      issuer: 'ITI',
+      date: 'Aug 2025',
+      category: 'Backend',
+      img: 'images/4.webp',
+      // credentialUrl: 'https://grow.google/certificates/...',
     },
     {
       id: 5,
-      title: 'CSS Advanced Techniques',
-      issuer: 'freeCodeCamp',
-      date: 'Jun 2023',
+      title: 'FrontEnd(Angular)',
+      issuer: 'DEPI',
+      date: 'may 2025',
       category: 'Frontend',
-      img: 'images/certs/css.webp',
+      img: 'images/3.webp',
+    },
+      {
+      id: 6,
+      title: 'FreeLancer',
+      issuer: 'Itida',
+      date: 'Oct 2025',
+      category: 'FreeLancer',
+      img: 'images/1.webp',
+      // credentialUrl: 'https://university.mongodb.com/...',
     },
     {
-      id: 6,
-      title: 'MongoDB & Mongoose',
-      issuer: 'MongoDB University',
-      date: 'Oct 2023',
-      category: 'Backend',
-      img: 'images/certs/mongodb.webp',
-      credentialUrl: 'https://university.mongodb.com/...',
+      id: 7,
+      title: 'Intern',
+      issuer: 'Itida',
+      date: 'may 2025',
+      category: 'FreeLancer',
+      img: 'images/2.webp',
     },
+    {
+      id: 8,
+      title: 'FrontEnd(Angular)',
+      issuer: 'DEPI',
+      date: 'may 2025',
+      category: 'Frontend',
+      img: 'images/7.webp',
+    },
+    {
+      id: 9,
+      title: 'FrontEnd(React.js)',
+      issuer: 'DEPI',
+      date: 'may 2025',
+      category: 'Frontend',
+      img: 'images/codveda.webp',
+    },
+    {
+      id: 10,
+      title: 'FrontEnd(React.js)',
+      issuer: 'DEPI',
+      date: 'may 2025',
+      category: 'Frontend',
+      img: 'images/codvedaoffer.webp',
+    },
+  
   ];
 
   get filteredCertificates(): Certificate[] {
@@ -139,6 +172,23 @@ export class certificates implements OnInit {
     };
     return colors[category] || 'cat-other';
   }
-
+// أضف هذه الـ Method داخل الـ class
+downloadImage(imageUrl: string, title: string) {
+  const fileName = `${title.replace(/\s+/g, '-').toLowerCase()}-certificate.webp`;
+  
+  fetch(imageUrl)
+    .then(response => response.blob())
+    .then(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = fileName; // اسم الملف عند التحميل
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    })
+    .catch(err => console.error('Error downloading image:', err));
+}
   ngOnInit(): void {}
 }
